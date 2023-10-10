@@ -14,23 +14,16 @@ go get github.com/hackincloud-com/go-oxapayments
 Just load the config with all the credentials and config from `InitConfig` then add your configurations using these functions
 
 ### Basic Usage for Merchant Create Invoice
+## Declare a init config
 ```go
-package main
-
-import (
-	"fmt"
-	"log"
-	"strings"
-	oxapayments"github.com/hackincloud-com/go-oxapayments"
-)
-
 var payment = oxapayments.InitConfig(
 		oxapayments.WithCurrency("USDT"),
 		oxapayments.WithApiKey("sandbox"),
 )
-
-
-func main() {
+```
+## Basic Usage
+```go
+func Basic_Usage() {
 	// Set an value for payment
 	payment.OrderId = "ORDER-1"
 	payment.Description = "Order For Mango"

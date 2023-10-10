@@ -1,6 +1,6 @@
-// Examples of using callback in the Fiber Golang
+// Examples of using callback using Fiber Golang
 
-package callback
+package main
 
 import (
 	"crypto/hmac"
