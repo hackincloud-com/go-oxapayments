@@ -41,7 +41,7 @@ func main() {
 	results := payment.Start(req)
 	// see the examples func below
 	CheckPaymentInfo(results.RespInvoice.TrackID) 
-	 // get the paylink
+	// get the paylink
     fmt.Println(results.PayLink)
 }
 ```
@@ -53,7 +53,8 @@ func CheckPaymentInfo(IdFromInvoice string){
     payment.TrackID = IdFromInvoice
     getinfo := payment.Set("https://api.oxapay.com/merchants/inquiry")
 	res := payment.Start(getinfo)
-    fmt.Println(res.Status) // status trx
+	// status trx
+    fmt.Println(res.Status) 
 }
 ```
 
