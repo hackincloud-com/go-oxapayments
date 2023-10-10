@@ -41,7 +41,8 @@ func main() {
 	results := payment.Start(req)
 	// see the examples func below
 	CheckPaymentInfo(results.RespInvoice.TrackID) 
-    fmt.Println(results.PayLink) // get the paylink
+	 // get the paylink
+    fmt.Println(results.PayLink)
 }
 ```
 
