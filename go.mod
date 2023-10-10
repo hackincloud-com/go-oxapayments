@@ -1,4 +1,4 @@
-module oxapayments
+module github.com/hackincloud-com/go-oxapayments
 
 go 1.20
 
