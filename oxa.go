@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"io"
 
-	httpclient "github.com/Hax0rCompany/repweb/pkg/repclient"
+	httpclient "github.com/hackincloud-com/hic-client"
 	"github.com/spf13/cobra"
 )
 

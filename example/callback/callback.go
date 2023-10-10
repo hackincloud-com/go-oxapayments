@@ -1,6 +1,6 @@
 // Examples of using callback in the Fiber Golang
 
-package oxapayments
+package callback
 
 import (
 	"crypto/hmac"
@@ -9,9 +9,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/Hax0rCompany/repweb/internal/app/types"
-	"github.com/Hax0rCompany/repweb/internal/utils"
-	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber"
 	"github.com/spf13/viper"
 )
 
@@ -35,22 +33,23 @@ type CallBack struct {
 
 func Callback(c *fiber.Ctx) error {
 	m := new(CallBack)
-	if err := utils.ParseBodyAndValidate(c, m); err != nil {
-		return c.JSON(&types.MsgResponse{
-			Status:  "error",
-			Message: err.Error(),
+	if err := c.BodyParser(m); err != nil {
+		return c.JSON(fiber.Map{
+			"Status":   "error",
+			"Messsage": err.Error(),
 		})
 	}
+
 	if m.Type != "payment" {
-		return c.JSON(&types.MsgResponse{
-			Status:  "error",
-			Message: "Invalid Data type",
+		return c.JSON(fiber.Map{
+			"Status":  "error",
+			"Message": "Invalid Data type",
 		})
 	}
 	hmacHeader := c.Get("HMAC")
 	api_secret_key := []byte(viper.GetString("settings.OXAPAY_MERCHANT_API_KEY")) // set vipet.getstring "urapikey" or if u want demo or sandbox use "sandbox"
 	hash := hmac.New(sha512.New, api_secret_key)
-	hash.Write(c.Body())
+	hash.Write([]byte(c.Body()))
 	calculatedHMAC := hash.Sum(nil)
 	calculatedHMACString := hex.EncodeToString(calculatedHMAC)
 	if calculatedHMACString == hmacHeader {
